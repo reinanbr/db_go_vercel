@@ -13,13 +13,19 @@ type ResponseIndex struct {
 }
 
 
-func Today(w http.ResponseWriter, r *http.Request) {
+func Index(w http.ResponseWriter, r *http.Request) {
+	Server := New()
+	Server.get("/",func(context *Content){
+
 	response := ResponseIndex{
 		Message:   "Estamos online",
 		Timestamp: time.Now().Format(time.RFC3339),
 	}
-	fmt.Print("server ok\n")
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(response)
-}
+	
+	context.JSON(200,H{"message":response.Message,"date":response.Timestamp})
+
+	//fmt.Print("server ok\n")
+	//w.Header().Set("Content-Type", "application/json")
+	//json.NewEncoder(w).Encode(response)
+})
 

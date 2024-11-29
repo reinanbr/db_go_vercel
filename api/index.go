@@ -7,13 +7,8 @@ import (
 	. "github.com/tbxark/g4vercel"
 )
 
-type ResponseIndex struct {
-	Message   string `json:"message"`
-	Timestamp string `json:"timestamp"`
-};
 
-
-func Index(w http.ResponseWriter, r *http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	server := New();
 	server.Use(Recovery(func(err interface{}, c *Context) {
 		if httpError, ok := err.(HttpError); ok {
@@ -34,8 +29,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 //		Timestamp: time.Now().Format(time.RFC3339),
 //	};
 	
-	context.JSON(200,
-	H{"message":"estamos fudendo","date":time.Now().Format(time.RFC3339)});
-})	
+		context.JSON(200,H{"message":"estamos fudendo","date":time.Now().Format(time.RFC3339)});
+	})	
 	server.Handle(w,r);
 }

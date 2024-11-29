@@ -3,6 +3,7 @@
   "builds": [
     {
       "src": "api/*.go",
+      "includeFiles": ["api/db/db.go","api/models/*.go"],
       "use": "@vercel/go"
     }
   ],

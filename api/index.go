@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
@@ -15,7 +14,7 @@ type ResponseIndex struct {
 
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	Server := New();
+	server := New();
 	server.Use(Recovery(func(err interface{}, c *Context) {
 		if httpError, ok := err.(HttpError); ok {
 			c.JSON(httpError.Status, H{
@@ -28,14 +27,15 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			})
 		}
 	}))
-	Server.GET("/",func(context *Content){
+	server.GET("/",func(context *Context) {
 
 //	response := ResponseIndex{
 //		Message:   "Estamos online",
 //		Timestamp: time.Now().Format(time.RFC3339),
 //	};
 	
-	context.JSON(200,H{"message":"estamos fudendo","date":time.Now().format.RFC3339});
-	
+	context.JSON(200,
+	H{"message":"estamos fudendo","date":time.Now().Format(time.RFC3339)});
+})	
 	server.Handle(w,r);
-});
+}

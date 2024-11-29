@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-	"github.com/tbxark/g4vercel"
+
+	. "github.com/tbxark/g4vercel"
 )
 
 type ResponseIndex struct {
@@ -16,7 +17,7 @@ type ResponseIndex struct {
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	Server := New()
-	Server.get("/",func(context *Content){
+	Server.GET("/",func(context *Content){
 
 	response := ResponseIndex{
 		Message:   "Estamos online",

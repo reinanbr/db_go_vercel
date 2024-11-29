@@ -13,7 +13,7 @@ import (
 )
 
 
-func ReadAccess(w http.ResponseWriter,r*http.Request){
+func Read(w http.ResponseWriter,r*http.Request){
 	pool :=psql_vercel.ConnectDB()
         defer pool.Close()
 	infoAccess,err := access_site_model.ReadAccessSites(pool)

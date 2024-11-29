@@ -1,16 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.go",
-      "use": "@vercel/go"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/main.go"
-    }
-  ]
+  "github": {
+    "silent": true
+  }
 }
-

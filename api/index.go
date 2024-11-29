@@ -13,7 +13,7 @@ type ResponseIndex struct {
 };
 
 
-func Handler(w http.ResponseWriter, r *http.Request) {
+func Index(w http.ResponseWriter, r *http.Request) {
 	server := New();
 	server.Use(Recovery(func(err interface{}, c *Context) {
 		if httpError, ok := err.(HttpError); ok {

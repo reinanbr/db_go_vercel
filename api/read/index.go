@@ -46,7 +46,7 @@ type ResponseModel struct {
 
 
 
-func ReadAccess(w http.ResponseWriter,r*http.Request){
+func Handler(w http.ResponseWriter,r*http.Request){
 	pool := ConnectDB()
         defer pool.Close()
 	infoAccess,err := ReadAccessSites(pool)

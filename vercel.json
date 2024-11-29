@@ -7,10 +7,10 @@
     }
   ],
   "routes": [
-    {"src": "/api/",
+    {"src": "/sex/",
             "dest": "/api/sex.go" 
       },
-    {"src":"/read_access/",
-	    "dest":"/api/readaccess.go"}
+    {"src":"/api/read_access/",
+     "dest":"/api/readaccess.go"}
   	]
 }

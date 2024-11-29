@@ -2,15 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/*.go",
+      "src": "api/read/index.go",
+      "use": "@vercel/go"
+    },    {
+      "src": "api/sex/index.go",
       "use": "@vercel/go"
     }
   ],
   "routes": [
-    {"src": "/sex/",
-            "dest": "/api/sex.go" 
+    {"src": "/api/sex",
+            "dest": "/api/sex/index.go" 
       },
-    {"src":"/api/read_access/",
-     "dest":"/api/readaccess.go"}
+    {"src":"/api/read",
+     "dest":"/api/read/index.go"}
   	]
 }

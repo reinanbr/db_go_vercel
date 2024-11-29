@@ -13,7 +13,7 @@ type ResponseIndex struct {
 }
 
 
-func Index(w http.ResponseWriter, r *http.Request) {
+func Today(w http.ResponseWriter, r *http.Request) {
 	response := ResponseIndex{
 		Message:   "Estamos online",
 		Timestamp: time.Now().Format(time.RFC3339),

@@ -1,35 +1,47 @@
 package handler
-
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
 	"time"
-	. "github.com/tbxark/g4vercel"
-)
+        "fmt"
+        "log"
+        "api_save_data/api/db"
+        "api_save_data/api/models"
+  )
 
-
-func Handler(w http.ResponseWriter, r *http.Request) {
-	server := New();
-	server.Use(Recovery(func(err interface{}, c *Context) {
-		if httpError, ok := err.(HttpError); ok {
-			c.JSON(httpError.Status, H{
-				"message": httpError.Error(),
-			})
-		} else {
-			message := fmt.Sprintf("%s", err)
-			c.JSON(500, H{
-				"message": message,
-			})
-		}
-	}))
-	server.GET("/",func(context *Context) {
-
-//	response := ResponseIndex{
-//		Message:   "Estamos online",
-//		Timestamp: time.Now().Format(time.RFC3339),
-//	};
-	
-		context.JSON(200,H{"message":"estamos fudendo","date":time.Now().Format(time.RFC3339)});
-	})	
-	server.Handle(w,r);
+type Response struct {
+	Message   string `json:"message"`
+	Timestamp string `json:"timestamp"`
 }
+
+// Handler é a função exportada para o Vercel.
+func Sex(w http.ResponseWriter, r *http.Request) {
+	response := Response{
+		Message:   "Estamos online",
+		Timestamp: time.Now().Format(time.RFC3339),
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+
+
+
+
+
+func ReadAccess(w http.ResponseWriter,r*http.Request){
+        pool :=psql_vercel.ConnectDB()
+        defer pool.Close()
+        infoAccess,err := access_site_model.ReadAccessSites(pool)
+        if err == nil{
+                w.Header().Set("Content-Type", "application/json")
+		if errJson := json.NewEncoder(w).Encode(infoAccess); errJson != nil {
+                        http.Error(w, "Erro ao gerar o JSON", http.StatusInternalServerError)
+                        log.Printf("Erro ao codificar JSON: %v", errJson)
+        }
+        }else{
+                fmt.Fprintf(w,"error: %v\n",err)
+        }
+}
+

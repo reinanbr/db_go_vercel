@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"os"
 	"time"
-	"github.com/joho/godotenv"
 	"github.com/jackc/pgx/v4/pgxpool"
 )
 
@@ -63,12 +62,12 @@ func ReadAccess(w http.ResponseWriter,r*http.Request){
 }
 
 
-func LoadEnv() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Erro ao carregar o arquivo .env")
-	}
-}
+//func LoadEnv() {
+//	err := godotenv.Load()
+//	if err != nil {
+//		log.Fatal("Erro ao carregar o arquivo .env")
+//	}
+//}
 
 
 func ReadAccessSites(pool *pgxpool.Pool) ([]AccessSiteJson, error) {
@@ -99,7 +98,7 @@ func ReadAccessSites(pool *pgxpool.Pool) ([]AccessSiteJson, error) {
 
 // Conectar ao banco de dados
 func ConnectDB() *pgxpool.Pool {
-	LoadEnv()
+//	LoadEnv()
 	databaseURL := os.Getenv("DATABASE_URL")
 	config, err := pgxpool.ParseConfig(databaseURL)
 	if err != nil {

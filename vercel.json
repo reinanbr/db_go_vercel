@@ -15,5 +15,5 @@
       },
     {"src":"/api/read",
      "dest":"/api/read/index.go"}
-  	]
+  	]  
 }
